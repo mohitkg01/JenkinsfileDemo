@@ -3,7 +3,6 @@ pipeline {
      stages {
           stage("Compile") {
                steps {
-                    // sh "mvn clean package"
                     sh "/usr/bin/mvn compile"
                }
           }
@@ -30,7 +29,6 @@ stage("Deploy to staging") {
      steps {
           
           sh "docker stop \$(docker ps -qa)"
-          
           sh "docker rm \$(docker ps -qa)"
           sh "docker run -d -it -v /var/lib/jenkins/workspace/pipeline-with-docker/target/:/usr/local/tomcat/webapps/ -p 8091:8080 --name Testtomcat deepak_tomcat"
      }
